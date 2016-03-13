@@ -12,6 +12,9 @@
         <Style x:Key="txtMarginStyle" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,0,5,0" />
         </Style>
+        <Style x:Key="imgMarginStyle" TargetType="Image">
+            <Setter Property="Margin" Value="2,5,2,5" />
+        </Style>
     </Page.Resources>
     <Grid>
         <ListView Name="lstTweets" Width="420" HorizontalAlignment="Center" >
@@ -21,16 +24,26 @@
                         <DockPanel Width="380">
                             <Image x:Name="imgUserProfileImage" Source="{Binding ProfileImageUrl}"
                                    DockPanel.Dock="Left"
+                                   Style="{StaticResource imgMarginStyle}"
                                    Width="50" Height="50" 
-                                   VerticalAlignment="Top" 
-                                   Margin="2,5,2,5" />
+                                   VerticalAlignment="Top"                                     />
                             <DockPanel DockPanel.Dock="Top">
                                 <TextBlock x:Name="txtUserName" Text="{Binding AuthorName}" FontWeight="Bold" Style="{StaticResource txtMarginStyle}" />
                                 <TextBlock x:Name="txtUserScreenName" Text="{Binding AuthorScreenName}" Style="{StaticResource txtMarginStyle}" />
                                 <TextBlock x:Name="txtCreatedDate" Text="{Binding CreatedDate, StringFormat=dd-MM-yyyy HH:mm:ss}" Style="{StaticResource txtMarginStyle}" />
                             </DockPanel>
                             <TextBlock Name="txtTweetText" Text="{Binding Text}" 
-                                       Style="{StaticResource txtMarginStyle}" TextWrapping="Wrap" />
+                                       DockPanel.Dock="Top"
+                                       Style="{StaticResource txtMarginStyle}" 
+                                       TextWrapping="Wrap" />
+                            <!--<TextBlock Name="txtHypeLink" DockPanel.Dock="Top">
+                                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate">
+                                    <TextBlock Text="{Binding Url}" />
+                                </Hyperlink>
+                            </TextBlock>-->
+                            <Image x:Name="imgTweetImage" Source="{Binding ImageUrl}" 
+                                   Style="{StaticResource imgMarginStyle}"
+                                   MouseLeftButtonUp="imgTweetImage_MouseLeftButtonUp" />
                         </DockPanel>
                     </Border>
                 </DataTemplate>

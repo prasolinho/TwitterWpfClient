@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,14 +33,38 @@ namespace TwitterWpfClient.Pages
             List<Tweet> tweets = new List<Tweet>(result.Count());
             foreach (var item in result)
             {
-                tweets.Add(new Tweet
+                if (item.Entities.Media.Count > 1)
                 {
-                    AuthorName = item.User.Name,
-                    AuthorScreenName = "@" + item.User.ScreenName,
-                    CreatedDate = item.CreatedDate,
-                    ProfileImageUrl = item.User.ProfileImageUrl,
-                    Text = item.Text
-                });
+
+                }
+                if (item.Entities.Urls.Count > 1)
+                {
+
+                }
+
+                Tweet tw = new Tweet();
+                tw.Text = item.Text;
+                tw.CreatedDate = item.CreatedDate;
+
+                if (item.Entities.Media.Count > 0)
+                {
+                    TwitterMedia media = item.Entities.Media[0];
+                    if (media.MediaType == TwitterMediaType.Photo)
+                        tw.ImageUrl = media.MediaUrl;
+                }
+                if (item.Entities.Urls.Count > 0)
+                {
+                    TwitterUrl urlData = item.Entities.Urls[0];
+                    tw.Url = urlData.DisplayUrl;
+
+                    tw.Text = item.Text.Remove(urlData.StartIndex, urlData.EndIndex - urlData.StartIndex);
+                }
+
+                tw.AuthorName = item.User.Name;
+                tw.AuthorScreenName = "@" + item.User.ScreenName;
+                tw.ProfileImageUrl = item.User.ProfileImageUrl;
+
+                tweets.Add(tw);
             }
             //Tweets = tweets;
             lstTweets.ItemsSource = tweets;
@@ -64,14 +89,28 @@ namespace TwitterWpfClient.Pages
 
             //Tweets = tweets;
         }
+
+        private void imgTweetImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //MessageBox.Show("imgTweetImage_MouseLeftButtonUp");
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.ToString());
+        }
     }
 
     public class Tweet
     {
+        public string Text { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Url { get; set; }
+        public string ImageUrl { get; set; }
+
         public string AuthorName { get; set; }
         public string AuthorScreenName { get; set; }
-        public DateTime CreatedDate { get; set; }
         public string ProfileImageUrl { get; set; }
-        public string Text { get; set; }
+        
     }
 }
