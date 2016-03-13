@@ -107,7 +107,7 @@ namespace TwitterWpfClient.Service
 
         public IEnumerable<TwitterStatus> GetTweets()
         {
-            return service.ListTweetsOnHomeTimeline(new ListTweetsOnHomeTimelineOptions { Count = 10 });
+            return service.ListTweetsOnHomeTimeline(new ListTweetsOnHomeTimelineOptions { Count = 30 });
         }
 
         public async Task<IEnumerable<TwitterStatus>> GetTweetsAsync()
