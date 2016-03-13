@@ -16,6 +16,7 @@ namespace TwitterWpfClient.Service
         Task<OAuthAccessToken> GetAccessTokenAsync(string verifier);
         bool AuthetnticateWithToken(string token, string tokenSecret);
 
+        IEnumerable<TwitterStatus> GetTweets();
         Task<IEnumerable<TwitterStatus>> GetTweetsAsync();
     }
 
@@ -103,6 +104,12 @@ namespace TwitterWpfClient.Service
             return true;
         }
 
+
+        public IEnumerable<TwitterStatus> GetTweets()
+        {
+            return service.ListTweetsOnHomeTimeline(new ListTweetsOnHomeTimelineOptions { Count = 10 });
+        }
+
         public async Task<IEnumerable<TwitterStatus>> GetTweetsAsync()
         {
             TwitterAsyncResult<IEnumerable<TwitterStatus>> tweets = await service
@@ -113,5 +120,6 @@ namespace TwitterWpfClient.Service
 
             return tweets.Value;
         }
+
     }
 }

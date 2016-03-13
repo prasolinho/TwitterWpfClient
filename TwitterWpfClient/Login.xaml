@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TwitterWpfClient"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="300" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Login" Height="300" Width="300" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="LoginMargin" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,0,5,10" />

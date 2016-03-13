@@ -8,8 +8,49 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="NewsFeed"
       Loaded="Page_Loaded">
-
+    <!--<Page.Resources>
+        <DataTemplate x:Key="TweetTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="imgUserProfileImage" Source="{Binding ProfileImageUrl}"
+                       Width="300" Height="300" />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="txtUserName" Text="{Binding AuthorName}" />
+                        <TextBlock x:Name="txtUserScreenName" Text="{Binding AuthorScreenName}" />
+                        <TextBlock x:Name="txtCreatedDate" Text="{Binding CreatedDate}" />
+                    </StackPanel>
+                    <TextBlock x:Name="txtTweetText" Text="{Binding Text}" TextWrapping="Wrap" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>-->
+    <Page.Resources>
+        <Style x:Key="txtMarginStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0,5,0" />
+        </Style>
+    </Page.Resources>
     <Grid>
-        <TextBlock Text="News Feed" FontSize="24" />
+        <ListView Name="lstTweets" Width="400" HorizontalAlignment="Center" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.75">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="imgUserProfileImage" Source="{Binding ProfileImageUrl}" 
+                                       Width="50" Height="50" 
+                                       VerticalAlignment="Top" 
+                                       Margin="2,5,2,5" />
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="txtUserName" Text="{Binding AuthorName}" FontWeight="Bold" Style="{StaticResource txtMarginStyle}" />
+                                    <TextBlock x:Name="txtUserScreenName" Text="{Binding AuthorScreenName}" Style="{StaticResource txtMarginStyle}" />
+                                    <TextBlock x:Name="txtCreatedDate" Text="{Binding CreatedDate}" Style="{StaticResource txtMarginStyle}" />
+                                </StackPanel>
+                                <TextBlock Name="txtTweetText" Text="{Binding Text}" Style="{StaticResource txtMarginStyle}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

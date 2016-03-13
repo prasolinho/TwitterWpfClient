@@ -29,14 +29,6 @@ namespace TwitterWpfClient
             this.authorizationUri = authorizationUri;
         }
 
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-#if DEBUG
-            txtPin.Text = @"0233410";
-#endif
-        }
-
         private void btnRedirectToTwitter_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(authorizationUri.ToString());
