@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient", "TwitterWpfClient\TwitterWpfClient.csproj", "{AA70B724-2B7E-4DB3-82AA-DBF95CD999CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.Service", "TwitterWpfClient.Service\TwitterWpfClient.Service.csproj", "{A5ABE936-9322-45D7-93CE-E7EFE89CABD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.Framework", "TwitterWpfClient.Framework\TwitterWpfClient.Framework.csproj", "{77433953-EDC8-4C8B-81E9-14F90EB4A107}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA70B724-2B7E-4DB3-82AA-DBF95CD999CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA70B724-2B7E-4DB3-82AA-DBF95CD999CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA70B724-2B7E-4DB3-82AA-DBF95CD999CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA70B724-2B7E-4DB3-82AA-DBF95CD999CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5ABE936-9322-45D7-93CE-E7EFE89CABD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5ABE936-9322-45D7-93CE-E7EFE89CABD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5ABE936-9322-45D7-93CE-E7EFE89CABD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5ABE936-9322-45D7-93CE-E7EFE89CABD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

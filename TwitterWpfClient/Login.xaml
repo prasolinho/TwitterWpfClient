@@ -1,0 +1,34 @@
+﻿<Window x:Class="TwitterWpfClient.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TwitterWpfClient"
+        mc:Ignorable="d"
+        Title="Login" Height="300" Width="300" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="LoginMargin" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0,5,10" />
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Witaj w aplikacji" />
+            <TextBlock Text="'Twitter WPF Client'" FontWeight="Bold"
+                       Style="{StaticResource LoginMargin}" />
+        </StackPanel>
+        <TextBlock TextWrapping="WrapWithOverflow"
+                   Style="{StaticResource LoginMargin}">
+            Aby zalogować się na swoje konto musisz uzyskać od Twittera kod PIN.
+            Klikając w poniższy link zostaniesz odpalona w Twojej domyślnej przeglądarce strona logowania do Twittera.
+            Po poprawnym zalogowaniu otrzymasz PIN, który należy wpisać w pole znajdujące się poniżej.
+        </TextBlock>
+        <Button Name="btnRedirectToTwitter" Content="Otworz stronę logowania" Margin="5,0,5,10"
+                Click="btnRedirectToTwitter_Click" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox Name="txtPin" Width="180" FontSize="24" 
+                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button Name="btnLogin" Content="Zalgouj" Width="80" Height="50" Click="btnLogin_Click" />
+        </StackPanel>
+    </StackPanel>
+</Window>

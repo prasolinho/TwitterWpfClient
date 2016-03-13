@@ -1,0 +1,40 @@
+﻿<Window x:Class="TwitterWpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TwitterWpfClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="NavButtonsStyle"
+               TargetType="Button">
+            <Setter Property="Margin" Value="5,5,20,5" />
+            <Setter Property="Background" Value="#1DA1F2" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Padding" Value="10,5,10,5" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="btnNewsFeed" Content="NewsFeed"
+                    Style="{StaticResource NavButtonsStyle}" />
+            <Button Name="btnNotifications" Content="Notifications" 
+                    Style="{StaticResource NavButtonsStyle}" />
+            <Button Name="btnMessages" Content="Messages" 
+                    Style="{StaticResource NavButtonsStyle}" />
+            <Button Name="btnMyProfile" Content="MyProfile" 
+                    Style="{StaticResource NavButtonsStyle}" />
+            <Button Name="btnSettings" Content="Settings"
+                    Style="{StaticResource NavButtonsStyle}" />
+        </StackPanel>
+        <Frame Name="MainFrame" Grid.Row="1" Source="Pages/NewsFeed.xaml" NavigationUIVisibility="Hidden">
+            <!--<TextBlock Text="Hello World!" FontSize="48" />-->
+        </Frame>
+    </Grid>
+</Window>
