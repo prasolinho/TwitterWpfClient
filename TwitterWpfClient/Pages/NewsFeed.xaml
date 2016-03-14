@@ -36,11 +36,11 @@
                                        DockPanel.Dock="Top"
                                        Style="{StaticResource txtMarginStyle}" 
                                        TextWrapping="Wrap" />
-                            <!--<TextBlock Name="txtHypeLink" DockPanel.Dock="Top">
-                                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate">
-                                    <TextBlock Text="{Binding Url}" />
+                            <TextBlock Name="txtHypeLink" DockPanel.Dock="Top" Style="{StaticResource txtMarginStyle}">
+                                <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                                    <TextBlock Text="{Binding DisplayUrl}" />
                                 </Hyperlink>
-                            </TextBlock>-->
+                            </TextBlock>
                             <Image x:Name="imgTweetImage" Source="{Binding ImageUrl}" 
                                    Style="{StaticResource imgMarginStyle}"
                                    MouseLeftButtonUp="imgTweetImage_MouseLeftButtonUp" />

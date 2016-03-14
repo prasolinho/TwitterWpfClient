@@ -44,7 +44,7 @@ namespace TwitterWpfClient.Pages
 
                 Tweet tw = new Tweet();
                 tw.Text = item.Text;
-                tw.CreatedDate = item.CreatedDate;
+                tw.CreatedDate = item.CreatedDate.AddHours(1);
 
                 if (item.Entities.Media.Count > 0)
                 {
@@ -55,7 +55,8 @@ namespace TwitterWpfClient.Pages
                 if (item.Entities.Urls.Count > 0)
                 {
                     TwitterUrl urlData = item.Entities.Urls[0];
-                    tw.Url = urlData.DisplayUrl;
+                    tw.DisplayUrl = urlData.DisplayUrl;
+                    tw.Url = urlData.Value;
 
                     tw.Text = item.Text.Remove(urlData.StartIndex, urlData.EndIndex - urlData.StartIndex);
                 }
@@ -98,6 +99,7 @@ namespace TwitterWpfClient.Pages
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(e.Uri.ToString());
+            e.Handled = true; // Aby nie otwierać w programie
         }
     }
 
@@ -105,6 +107,8 @@ namespace TwitterWpfClient.Pages
     {
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public string DisplayUrl { get; set; }
         public string Url { get; set; }
         public string ImageUrl { get; set; }
 
