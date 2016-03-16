@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TwitterWpfClient.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="NewsFeed"
+      Title="NewsFeed" Name="pageNewsFeed"
       Loaded="Page_Loaded">
     <Page.Resources>
         <Style x:Key="txtMarginStyle" TargetType="TextBlock">
@@ -17,7 +17,8 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListView Name="lstTweets" Width="420" HorizontalAlignment="Center" >
+        <ListView Name="lstTweets" Width="420" HorizontalAlignment="Center" 
+                  Loaded="lstTweets_Loaded">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="LightGray" BorderThickness="0, 0, 0, 0.75">
@@ -32,7 +33,7 @@
                                 <TextBlock x:Name="txtUserScreenName" Text="{Binding AuthorScreenName}" Style="{StaticResource txtMarginStyle}" />
                                 <TextBlock x:Name="txtCreatedDate" Text="{Binding CreatedDate, StringFormat=dd-MM-yyyy HH:mm:ss}" Style="{StaticResource txtMarginStyle}" />
                             </DockPanel>
-                            <TextBlock Name="txtTweetText" Text="{Binding Text}" 
+                            <TextBlock Name="txtTweetText" Text="{Binding Text}" Tag="{Binding Id}"
                                        DockPanel.Dock="Top"
                                        Style="{StaticResource txtMarginStyle}" 
                                        TextWrapping="Wrap" />
