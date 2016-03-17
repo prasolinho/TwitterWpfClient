@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TweetSharp;
 
 namespace TwitterWpfClient.Pages
@@ -67,50 +60,19 @@ namespace TwitterWpfClient.Pages
 
                 if (item.Entities.Mentions.Count > 0)
                 {
-                    int count = item.Entities.Mentions.Count;
-                    int mentionIdx = 0;
-                    bool allMentions = false;
+                    tw.HasMentions = true;
 
-                    tw.TweetText = new TextBlock();
-
-                    StringBuilder sb = new StringBuilder(100);
-                    for (int i = 0; i < item.Text.Length; i++)
-                    {
-                        if (!allMentions)
+                    tw.Mentions = item.Entities.Mentions
+                        .OrderBy(m => m.StartIndex)
+                        .Select(m => new Mention
                         {
-                            if (i == item.Entities.Mentions[mentionIdx].StartIndex)
-                            {
-                                if (sb.Length > 0)
-                                {
-                                    tw.TweetText.Inlines.Add(sb.ToString());
-                                    sb.Clear();
-                                }
-                            }
-                            if (i == item.Entities.Mentions[mentionIdx].EndIndex)
-                            {
-                                Run hyperLinkText = new Run(item.Entities.Mentions[mentionIdx].ScreenName);
-                                Hyperlink hyperlink = new Hyperlink(hyperLinkText);
-                                hyperlink.NavigateUri = new Uri("https://twitter.com/" + item.Entities.Mentions[mentionIdx].ScreenName);
-                                hyperlink.RequestNavigate += Hyperlink_RequestNavigate;
+                            StartIndex = m.StartIndex,
+                            EndIndex = m.EndIndex,
+                            ScreenName = m.ScreenName
+                        })
+                        .ToArray();
 
-                                tw.TweetText.Inlines.Add(hyperlink);
-
-                                sb.Clear();
-
-
-                                mentionIdx++;
-                                if (mentionIdx == item.Entities.Mentions.Count)
-                                    allMentions = true;
-                            }
-                        }
-                        Char c = item.Text[i];
-                        sb.Append(c);
-                    }
-
-                    if (sb.Length > 0)
-                    {
-                        tw.TweetText.Inlines.Add(sb.ToString());
-                    }
+                   
 
                     //tw.Text = tw.TweetText.Text;
                 }
@@ -123,33 +85,6 @@ namespace TwitterWpfClient.Pages
             }
             //Tweets = tweets;
             lstTweets.ItemsSource = tweets;
-        }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
-
-            //var result = await Service.Twitter.Instance.GetTweetsAsync();
-
-            //List<Tweet> tweets = new List<Tweet>(result.Count());
-            //foreach (var item in result)
-            //{
-            //    tweets.Add(new Tweet
-            //    {
-            //        AuthorName = item.User.Name,
-            //        AuthorScreenName = item.User.ScreenName,
-            //        CreatedDate = item.CreatedDate,
-            //        ProfileImageUrl = item.User.ProfileImageUrl,
-            //        Text = item.Text
-            //    });
-            //}
-
-            //Tweets = tweets;
-        }
-
-        private void imgTweetImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            //MessageBox.Show("imgTweetImage_MouseLeftButtonUp");
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -177,52 +112,58 @@ namespace TwitterWpfClient.Pages
 
         private void UpdateVisualItems()
         {
-            int idx = 1;
             foreach (TextBlock tb in Framework.Helpers.WpfTemplate.FindVisualChildren<TextBlock>(this))
             {
                 if (tb.Name == "txtTweetText")
                 {
                     long id = Convert.ToInt64(tb.Tag);
-
-                    //tb = tweets.Where(t => t.Id == id).Select(t => t.TweetText).First();
-
-                    TextBlock @new = tweets.Where(t => t.Id == id).Select(t => t.TweetText).First();
-
-                    if (@new != null && @new.Inlines.Count > 0)
+                    Tweet tweet = tweets.Where(t => t.Id == id).First();
+                    if (tweet.HasMentions)
                     {
                         tb.Inlines.Clear();
-                        foreach (var inline in @new.Inlines)
-                        {
-                            try
-                            {
-                                string text = XamlWriter.Save(inline);
-                                Stream s = new MemoryStream(Encoding.Default.GetBytes(text));
-                                Inline temp = XamlReader.Load(s) as Inline;
 
-                                tb.Inlines.Add(temp);
-                            }
-                            catch (Exception ex)
+                        int count = tweet.Mentions.Length;
+                        int mentionIdx = 0;
+                        bool allMentions = false;
+
+                        StringBuilder sb = new StringBuilder(100);
+                        for (int i = 0; i < tweet.Text.Length; i++)
+                        {
+                            if (!allMentions)
                             {
-                                Debug.WriteLine(ex.ToString());
+                                if (i == tweet.Mentions[mentionIdx].StartIndex)
+                                {
+                                    if (sb.Length > 0)
+                                    {
+                                        tb.Inlines.Add(sb.ToString());
+                                        sb.Clear();
+                                    }
+                                }
+                                if (i == tweet.Mentions[mentionIdx].EndIndex)
+                                {
+                                    Run hyperLinkText = new Run(tweet.Mentions[mentionIdx].ScreenName);
+                                    Hyperlink hyperlink = new Hyperlink(hyperLinkText);
+                                    hyperlink.NavigateUri = new Uri("https://twitter.com/" + tweet.Mentions[mentionIdx].ScreenName);
+                                    hyperlink.RequestNavigate += Hyperlink_RequestNavigate;
+
+                                    tb.Inlines.Add(hyperlink);
+
+                                    sb.Clear();
+
+                                    mentionIdx++;
+                                    if (mentionIdx == tweet.Mentions.Length)
+                                        allMentions = true;
+                                }
                             }
+                            Char c = tweet.Text[i];
+                            sb.Append(c);
+                        }
+
+                        if (sb.Length > 0)
+                        {
+                            tb.Inlines.Add(sb.ToString());
                         }
                     }
-                    //else
-                    //    tb.Text = @new.Text;
-
-                    //tb.Inlines.AddRange(tweets.Where(t => t.Id == id).Select(t => t.TweetText.Inlines).First());
-
-                    //Run run2 = new Run(" Please");
-                    //Hyperlink hyperlink = new Hyperlink(run2)
-                    //{
-                    //    NavigateUri = new Uri("http://stackoverflow.com")
-                    //};
-                    //hyperlink.RequestNavigate += Hyperlink_RequestNavigate; //to be implemented
-
-                    //tb.Inlines.Clear();
-                    //tb.Inlines.Add("Test 1");
-                    //tb.Inlines.Add(hyperlink);
-                    //tb.Inlines.Add("koniec");
                 }
             }
         }
@@ -247,7 +188,17 @@ namespace TwitterWpfClient.Pages
         public string AuthorScreenName { get; set; }
         public string ProfileImageUrl { get; set; }
 
-        public TextBlock TweetText { get; set; }
+        //public TextBlock TweetText { get; set; }
 
+        public bool HasMentions { get; set; }
+        public Mention[] Mentions { get; set; }
+    }
+
+    public class Mention
+    {
+        public int Order { get; set; }
+        public int StartIndex { get; set; }
+        public int EndIndex { get; set; }
+        public string ScreenName { get; set; }
     }
 }

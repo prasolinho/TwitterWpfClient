@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:TwitterWpfClient.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="NewsFeed" Name="pageNewsFeed"
-      Loaded="Page_Loaded">
+      Title="NewsFeed" Name="pageNewsFeed" >
     <Page.Resources>
         <Style x:Key="txtMarginStyle" TargetType="TextBlock">
             <Setter Property="Margin" Value="5,0,5,0" />
@@ -43,8 +42,7 @@
                                 </Hyperlink>
                             </TextBlock>
                             <Image x:Name="imgTweetImage" Source="{Binding ImageUrl}" 
-                                   Style="{StaticResource imgMarginStyle}"
-                                   MouseLeftButtonUp="imgTweetImage_MouseLeftButtonUp" />
+                                   Style="{StaticResource imgMarginStyle}" />
                         </DockPanel>
                     </Border>
                 </DataTemplate>
