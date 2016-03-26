@@ -112,14 +112,19 @@ namespace TwitterWpfClient.Pages
 
         private void UpdateVisualItems()
         {
-            foreach (TextBlock tb in Framework.Helpers.WpfTemplate.FindVisualChildren<TextBlock>(this))
+            foreach (TextBlock tb in Framework.Helpers.WpfTemplate.FindVisualChildren<TextBlock>(lstTweets))
             {
                 if (tb.Name == "txtTweetText")
                 {
                     long id = Convert.ToInt64(tb.Tag);
                     Tweet tweet = tweets.Where(t => t.Id == id).First();
-                    if (tweet.HasMentions)
+
+
+                    if (!tweet.ContentModified && tweet.HasMentions)
                     {
+
+                        Debug.WriteLine("TODO: " + tweet.Text);
+
                         tb.Inlines.Clear();
 
                         int count = tweet.Mentions.Length;
@@ -163,6 +168,7 @@ namespace TwitterWpfClient.Pages
                         {
                             tb.Inlines.Add(sb.ToString());
                         }
+                        tweet.ContentModified = true;
                     }
                 }
             }
@@ -188,10 +194,10 @@ namespace TwitterWpfClient.Pages
         public string AuthorScreenName { get; set; }
         public string ProfileImageUrl { get; set; }
 
-        //public TextBlock TweetText { get; set; }
-
         public bool HasMentions { get; set; }
         public Mention[] Mentions { get; set; }
+
+        public bool ContentModified { get; set; }
     }
 
     public class Mention
