@@ -6,14 +6,20 @@ namespace TwitterWpfClient.Framework
     public class AppSettings : IAppSettings
     {
         private static readonly IAppSettings instance = new AppSettings();
-        private static readonly object lockSettings = new object();
-        public static IAppSettings Instance { get { return instance; } }
+        private static readonly object lockSettings = new object ();
+        public static IAppSettings Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
         public string ConsumerKey
         {
             get
             {
-                lock(lockSettings)
+                lock (lockSettings)
                 {
                     return ConfigurationManager.AppSettings["consumerKey"];
                 }
@@ -24,7 +30,7 @@ namespace TwitterWpfClient.Framework
         {
             get
             {
-                lock(lockSettings)
+                lock (lockSettings)
                 {
                     return ConfigurationManager.AppSettings["consumerSecret"];
                 }
@@ -58,7 +64,6 @@ namespace TwitterWpfClient.Framework
         /// </summary>
         private AppSettings()
         {
-
         }
 
         public bool AddSetting(string key, string value)
@@ -68,25 +73,14 @@ namespace TwitterWpfClient.Framework
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings.Add(key, value);
                 config.Save(ConfigurationSaveMode.Modified);
-
                 ConfigurationManager.RefreshSection("appSettings");
             }
             catch (Exception)
             {
                 throw;
             }
+
             return true;
         }
-    }
-
-    public interface IAppSettings
-    {
-        string ConsumerKey { get; }
-        string ConsumerSecret { get; }
-
-        string Token { get; }
-        string TokenSecret { get; }
-
-        bool AddSetting(string key, string value);
     }
 }

@@ -134,6 +134,10 @@
       <Project>{a5abe936-9322-45d7-93ce-e7efe89cabd9}</Project>
       <Name>TwitterWpfClient.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwitterWpfClient.ViewModels\TwitterWpfClient.ViewModels.csproj">
+      <Project>{f3716e8e-effc-43ba-abdc-726b69607102}</Project>
+      <Name>TwitterWpfClient.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

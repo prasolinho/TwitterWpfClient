@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.Service", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.Framework", "TwitterWpfClient.Framework\TwitterWpfClient.Framework.csproj", "{77433953-EDC8-4C8B-81E9-14F90EB4A107}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.ViewModels", "TwitterWpfClient.ViewModels\TwitterWpfClient.ViewModels.csproj", "{F3716E8E-EFFC-43BA-ABDC-726B69607102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterWpfClient.Models", "TwitterWpfClient.Models\TwitterWpfClient.Models.csproj", "{213D2DDC-7B61-4D81-973F-4EE110E1B3D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77433953-EDC8-4C8B-81E9-14F90EB4A107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3716E8E-EFFC-43BA-ABDC-726B69607102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3716E8E-EFFC-43BA-ABDC-726B69607102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3716E8E-EFFC-43BA-ABDC-726B69607102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3716E8E-EFFC-43BA-ABDC-726B69607102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213D2DDC-7B61-4D81-973F-4EE110E1B3D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213D2DDC-7B61-4D81-973F-4EE110E1B3D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213D2DDC-7B61-4D81-973F-4EE110E1B3D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213D2DDC-7B61-4D81-973F-4EE110E1B3D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
